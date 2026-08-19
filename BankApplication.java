@@ -1,13 +1,12 @@
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class BankApplication {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        HashMap<Integer, Account> accounts = new HashMap<>();
+        Scanner sc= new Scanner(System.in);
+        LinkedHashMap<Integer, Account> accounts = new LinkedHashMap<>();
 
         int choice;
 
@@ -21,27 +20,29 @@ public class BankApplication {
             System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
-            choice = scanner.nextInt();
+            choice = sc.nextInt();
 
             switch (choice) {
 
                 case 1:
 
                     System.out.print("Enter account number: ");
-                    int accountNumber = scanner.nextInt();
+                    int accountNumber =sc.nextInt();
 
-                    scanner.nextLine();
+                    sc.nextLine();
 
                     System.out.print("Enter account holder name: ");
-                    String name = scanner.nextLine();
+                    String name = sc.nextLine();
 
                     System.out.print("Enter initial balance: ");
-                    double balance = scanner.nextDouble();
+                    double balance = sc.nextDouble();
 
                     if (accounts.containsKey(accountNumber)) {
                         System.out.println("Account already exists.");
+
                     } else if (balance < 0) {
                         System.out.println("Balance cannot be negative.");
+
                     } else {
 
                         Account account =
@@ -57,17 +58,18 @@ public class BankApplication {
                 case 2:
 
                     System.out.print("Enter account number: ");
-                    int depositAccountNumber = scanner.nextInt();
+                    int depositAccountNumber = sc.nextInt();
 
                     Account depositAccount =
                             accounts.get(depositAccountNumber);
 
                     if (depositAccount == null) {
                         System.out.println("Account not found.");
+
                     } else {
 
                         System.out.print("Enter amount to deposit: ");
-                        double amount = scanner.nextDouble();
+                        double amount = sc.nextDouble();
 
                         depositAccount.deposit(amount);
                     }
@@ -77,17 +79,18 @@ public class BankApplication {
                 case 3:
 
                     System.out.print("Enter account number: ");
-                    int withdrawAccountNumber = scanner.nextInt();
+                    int withdrawAccountNumber = sc.nextInt();
 
                     Account withdrawAccount =
                             accounts.get(withdrawAccountNumber);
 
                     if (withdrawAccount == null) {
                         System.out.println("Account not found.");
+
                     } else {
 
                         System.out.print("Enter amount to withdraw: ");
-                        double amount = scanner.nextDouble();
+                        double amount = sc.nextDouble();
 
                         withdrawAccount.withdraw(amount);
                     }
@@ -97,68 +100,55 @@ public class BankApplication {
                 case 4:
 
                     System.out.print("Enter account number: ");
-                    int balanceAccountNumber = scanner.nextInt();
+                    int balanceAccountNumber = sc.nextInt();
 
                     Account balanceAccount =
                             accounts.get(balanceAccountNumber);
 
                     if (balanceAccount == null) {
                         System.out.println("Account not found.");
+
                     } else {
 
-                        System.out.println("Account Number: "
+                        System.out.println(
+                                "Account Number: "
                                 + balanceAccount.getAccountNumber());
 
-                        System.out.println("Account Holder: "
+                        System.out.println(
+                                "Account Holder: "
                                 + balanceAccount.getName());
 
-                        System.out.println("Current Balance: "
+                        System.out.println(
+                                "Current Balance: "
                                 + balanceAccount.getBalance());
                     }
-
                     break;
-
                 case 5:
-
                     if (accounts.isEmpty()) {
                         System.out.println("No accounts available.");
                     } else {
-
                         System.out.println("\n===== ALL ACCOUNTS =====");
-
                         for (Account account : accounts.values()) {
-
                             System.out.println(
                                     "Account Number: "
                                     + account.getAccountNumber());
-
                             System.out.println(
                                     "Name: "
                                     + account.getName());
-
                             System.out.println(
                                     "Balance: "
                                     + account.getBalance());
-
                             System.out.println("-----------------------");
                         }
                     }
-
                     break;
-
                 case 6:
-
-                    System.out.println("Thank you for using the Banking Application.");
-
+                    System.out.println( "Thank you for using the Banking Application.");
                     break;
-
                 default:
-
                     System.out.println("Invalid choice. Please try again.");
             }
-
-        } while (choice != 6);
-
-        scanner.close();
+        } while (choice!=6);
+        sc.close();
     }
 }
